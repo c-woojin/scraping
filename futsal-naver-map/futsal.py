@@ -19,7 +19,7 @@ params: dict = dict(
     lang="ko",
 )
 
-f = open('futsal.csv', 'w', newline='')
+f = open("futsal.csv", "w", newline="")
 wr = csv.writer(f)
 i = 1
 
