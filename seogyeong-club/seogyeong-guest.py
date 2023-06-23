@@ -1,7 +1,7 @@
 import csv
 import time
 from datetime import date, datetime
-from typing import List, Tuple
+from typing import List
 
 from selenium import webdriver
 from selenium.common import NoSuchElementException
@@ -26,7 +26,7 @@ driver.switch_to.frame("down")
 
 next_page: str = "2"
 
-with open("seogyeong.csv", "w", newline="") as f:
+with open("seogyeong-guest.csv", "w", newline="") as f:
     csv_writer = csv.writer(f)
     while True:
         article_list_e: WebElement = WebDriverWait(driver, 10).until(
