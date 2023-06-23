@@ -49,6 +49,7 @@ try:
         with open("seogyeong-match-football.csv", "w", newline="") as f:
             csv_writer = csv.writer(f)
             while True:
+                next_board: bool = False
                 article_list_e: WebElement = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.ID, "article-list"))
                 )
@@ -87,9 +88,13 @@ try:
                     data.append([board_name, title, writer, created_at, look])
 
                     if created_at.year == 2021:
-                        driver.quit()
+                        next_board = True
+                        break
 
                 csv_writer.writerows(data)
+
+                if next_board:
+                    break
 
                 page_list_e: WebElement = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.CLASS_NAME, "list_paging"))
@@ -104,7 +109,9 @@ try:
                         break
 
                 time.sleep(1)
-except MaxRetryError:
-    driver.quit()
+except MaxRetryError as e:
+    print(e)
+
+driver.quit()
 
 print("Successfully completed")
