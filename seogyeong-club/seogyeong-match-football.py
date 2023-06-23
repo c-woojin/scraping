@@ -37,16 +37,15 @@ service = Service(executable_path=ChromeDriverManager().install())
 driver: WebDriver = webdriver.Chrome(service=service)
 
 try:
-    for board_name, path in paths:
-        url: str = f"{base_url}{path}"
+    with open("seogyeong-match-football.csv", "w", newline="") as f:
+        for board_name, path in paths:
+            url: str = f"{base_url}{path}"
 
-        driver.get(url)
+            driver.get(url)
 
-        driver.switch_to.frame("down")
+            driver.switch_to.frame("down")
 
-        next_page: str = "2"
-
-        with open("seogyeong-match-football.csv", "w", newline="") as f:
+            next_page: str = "2"
             csv_writer = csv.writer(f)
             while True:
                 next_board: bool = False
